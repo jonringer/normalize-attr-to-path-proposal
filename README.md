@@ -30,7 +30,7 @@ There's four scenarios which in particular which should be addressed:
 - Directory name should directly correspond with attr
   - E.g. `gtk/3.x.nix` should be `gtk3/default.nix`
 - Passing overrides to `callPackage` should be discouraged, instead the specific attr should be referenced by the nix expression
-  - E.g. Listing `ffmpeg` in the nix expression, but pass `ffmpeg = ffmpeg_7;` in the overrides, it should just be `ffmpeg_7` in the nix expression
+  - E.g. Listing `ffmpeg` in the nix expression, but passing `ffmpeg = ffmpeg_7;` in the overrides, it should just be `ffmpeg_7` in the nix expression
 
 ## Adjacent efforts
 
