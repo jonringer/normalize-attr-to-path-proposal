@@ -12,8 +12,8 @@ Created: 2024-10-06
 # Summary
 
 Nixpkgs contains a lot of legacy "oddities" which cause some impediance mismatch
-when currating a larget package set. One of these "oddities" is that is fairly
-common for packages to not align the expect file path. This proposal wants
+when currating a large package set. One of these "oddities" is that is fairly
+common for packages to not align the expected file path. This proposal wants
 to enforce that the "way a package is consumed should reflect where it is placed".
 
 Normalizing names and file paths align nicely with [auto-called-directories](https://github.com/jonringer/nix-lib/commit/86961f6f0139a70ee29a74237dd59a9936299ed0)
@@ -25,12 +25,12 @@ There's four scenarios which in particular which should be addressed:
 - Attrs referencing a wrapper or specific version. E.g. `gobjection-introspection` points to a wrapper.nix
   - Instead, the default attr should point to `default.nix` and the `-unwrapped` variant should point to an `unwrapped.nix`
 - File locations should be consolidated in a way to reflect the package scope in which they are contained
-  - E.g. `pkgs.expat` -> `pkgs/expat/default.nix`
-  - E.g. `python.pkgs.pip` -> `python/pkgs/pip/default.nix`
+  - E.g. `attr: pkgs.expat` -> `file: pkgs/expat/default.nix`
+  - E.g. `attr: python.pkgs.pip` -> `file: python/pkgs/pip/default.nix`
 - Directory name should directly correspond with attr
   - E.g. `gtk/3.x.nix` should be `gtk3/default.nix`
 - Passing overrides to `callPackage` should be discouraged, instead the specific attr should be referenced by the nix expression
-  - E.g. Listing `ffmpeg` in the nix expression, but pass `ffmpeg = ffmpeg_7;` in the overrides, it should just be `ffmpeg_7`
+  - E.g. Listing `ffmpeg` in the nix expression, but pass `ffmpeg = ffmpeg_7;` in the overrides, it should just be `ffmpeg_7` in the nix expression
 
 ## Adjacent efforts
 
